@@ -22,7 +22,7 @@ public class DatabaseExample {
             stmt = conn.createStatement();
 
             // Test Query
-            String sql = "SELECT customerid, firstname, lastname, email FROM customer_farah_batch41";
+            String sql = "";
             try {
                 ResultSet rs = stmt.executeQuery(sql);
 
@@ -33,17 +33,7 @@ public class DatabaseExample {
 
                 // Test Handling of Result Set
                 while (rs.next()) {
-                    String customerid = rs.getString("customerid");
-                    String firstname = rs.getString("firstname");
-                    String lastname = rs.getString("lastname");
-                    String email = rs.getString("email");
 
-                    // Test for Null Values
-                    if (firstname == null || lastname == null || email == null) {
-                        System.out.println("Null value encountered for customer ID: " + customerid);
-                    }
-
-                    System.out.println("Customer ID: " + customerid + ", Name: " + firstname + " " + lastname + ", Email: " + email);
                 }
                 rs.close();
             } catch (SQLException e) {
