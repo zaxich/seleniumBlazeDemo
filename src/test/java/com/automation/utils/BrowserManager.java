@@ -15,12 +15,13 @@ public class BrowserManager {
         String name = PropertiesLoader.loadProperty("browser.name");
         if (name.equalsIgnoreCase("Chrome")) {
 
-            String pathExtension = PropertiesLoader.loadProperty("chrome.extension.adblock.path");
+//            String pathExtension = PropertiesLoader.loadProperty("chrome.extension.adblock.path");
 
             System.setProperty("webdriver.chrome.silentOutput", "true");
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.addArguments("load-extension=" + pathExtension); //uBlock Origin
-            chromeOptions.addArguments("--headless");
+//            chromeOptions.addArguments("load-extension=" + pathExtension); //uBlock Origin
+//            chromeOptions.addArguments("--headless");
+            chromeOptions.addArguments("--start-fullscreen");
             driver = new ChromeDriver(chromeOptions);
 
         } else if (name.equalsIgnoreCase("Firefox")) {
