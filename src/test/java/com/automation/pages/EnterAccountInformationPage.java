@@ -1,8 +1,8 @@
-package com.automationexercise.pages;
+package com.automation.pages;
 
-import com.automationexercise.tests.TestBasic;
-import com.automationexercise.utils.JSONReader;
-import com.automationexercise.utils.Util;
+import com.automation.BaseTest;
+import com.automation.utils.JSONReader;
+import com.automation.utils.Util;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.io.IOException;
 
-public class EnterAccountInformationPage extends TestBasic {
+public class EnterAccountInformationPage extends BaseTest {
 
     @FindBy(xpath = "//b[contains(.,'Enter Account Information')]")
     private WebElement enterAccountInformation;

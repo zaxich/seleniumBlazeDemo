@@ -1,7 +1,7 @@
-package com.automationexercise.pages;
+package com.automation.pages;
 
-import com.automationexercise.tests.TestBasic;
-import com.automationexercise.utils.JSONReader;
+import com.automation.BaseTest;
+import com.automation.utils.JSONReader;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.io.IOException;
 
-public class LoginSignupPage extends TestBasic {
+public class LoginSignupPage extends BaseTest {
 
     @FindBy(css = "div[class='login-form'] h2")
     private WebElement loginToYourAccount;

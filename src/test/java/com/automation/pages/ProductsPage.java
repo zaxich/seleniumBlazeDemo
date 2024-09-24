@@ -1,6 +1,6 @@
-package com.automationexercise.pages;
+package com.automation.pages;
 
-import com.automationexercise.utils.SeleniumHelper;
+import com.automation.utils.SeleniumHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.aspectj.runtime.internal.Conversions.intValue;
 
 public class ProductsPage {
 
