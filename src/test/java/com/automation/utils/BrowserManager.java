@@ -26,9 +26,11 @@ public class BrowserManager {
 
         } else if (name.equalsIgnoreCase("Firefox")) {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.addArguments("--headless");
+//            firefoxOptions.addArguments("--headless");
             firefoxOptions.addArguments("--private");
+            firefoxOptions.addArguments("--start-fullscreen");
             driver = new FirefoxDriver(firefoxOptions);
+            driver.manage().window().maximize();
         }
         return driver;
     }
