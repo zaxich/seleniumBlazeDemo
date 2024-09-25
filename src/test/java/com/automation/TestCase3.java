@@ -23,11 +23,18 @@ public class TestCase3 extends BaseTest {
             7. Click 'login' button
             8. Verify error 'Your email or password is incorrect!' is visible""")
     public void loginUserWithIncorrectEmailAndPassword() {
-
+        TestCase1.verifyThatHomePageIsVisibleSuccessfully();
+        TestCase2.verifyLoginToYourAccountIsVisible();
+        verifyErrorYourEmailOrPasswordIsIncorrectIsVisible();
     }
 
     @Step("Verify error 'Your email or password is incorrect!' is visible")
     private void verifyErrorYourEmailOrPasswordIsIncorrectIsVisible() {
+        String email = "email" + Util.generateCurrentDateAndTime() + "@incorrect.pl";
+        String pass = "pass" + Util.generateCurrentDateAndTime();
 
+        String errorLoginText = new LoginSignupPage(getDriver()).fillIncorrectLogin(email, pass).getErrorLogin().getText();
+
+        Assert.assertEquals(errorLoginText, "Your email or password is incorrect!", "Verify error 'Your email or password is incorrect!' is visible");
     }
 }

@@ -25,11 +25,19 @@ public class TestCase5 extends BaseTest {
             7. Click 'Signup' button
             8. Verify error 'Email Address already exist!' is visible""")
     public void registerUserWithExistingEmail() throws IOException, ParseException {
-
+        TestCase1.verifyThatHomePageIsVisibleSuccessfully();
+        TestCase1.verifyNewUserSignupIsVisible();
+        verifyErrorEmailAddressAlreadyExistIsVisible();
     }
 
     @Step("Verify error 'Email Address already exist!' is visible")
     private void verifyErrorEmailAddressAlreadyExistIsVisible() throws IOException, ParseException {
-
+        String emailAddressAlreadyExist = new LoginSignupPage(getDriver())
+                .fillIncorrectSignup()
+                .getEmailAddressAlreadyExist()
+                .getText();
+        Assert.assertEquals(emailAddressAlreadyExist,
+                "Email Address already exist!",
+                "Verify error 'Email Address already exist!' is visible");
     }
 }

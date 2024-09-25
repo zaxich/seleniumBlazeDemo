@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class HomePage extends BaseTest {
 
-    @FindBy(css = "div[class='item active'] img[alt='demo website for practice']")
+    @FindBy(xpath = "//img[@alt='demo website for practice']")
     private WebElement girlImgResponsive;
 
     @FindBy(css = "a[href='/login']")

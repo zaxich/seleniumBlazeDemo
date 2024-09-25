@@ -11,7 +11,7 @@ public class JSONReader {
 
     public static String existingUser(String data) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        FileReader fileReader = new FileReader("src\\test\\java\\com\\automation\\resources\\testData\\ExistingUser.json");
+        FileReader fileReader = new FileReader("src/test/java/com/automation/resources/testData/ExistingUser.json");
         Object obj = jsonParser.parse(fileReader);
         JSONObject existingUser = (JSONObject) obj;
         return (String) existingUser.get(data);
@@ -19,7 +19,7 @@ public class JSONReader {
 
     public static String accountDetails(String data) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        FileReader fileReader = new FileReader("src\\test\\java\\com\\automation\\resources\\testData\\AccountDetails.json");
+        FileReader fileReader = new FileReader("src/test/java/com/automation/resources/testData/AccountDetails.json");
         Object obj = jsonParser.parse(fileReader);
         JSONObject accountDetails = (JSONObject) obj;
         return (String)accountDetails.get(data);
@@ -27,7 +27,7 @@ public class JSONReader {
 
     public static String paymentDetails(String data) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        FileReader fileReader = new FileReader("src\\test\\resources\\testData\\PaymentDetails.json");
+        FileReader fileReader = new FileReader("src/test/resources/testData/PaymentDetails.json");
         Object obj = jsonParser.parse(fileReader);
         JSONObject paymentDetails = (JSONObject) obj;
         return (String)paymentDetails.get(data);
