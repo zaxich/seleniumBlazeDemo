@@ -4,7 +4,9 @@ import com.automation.utils.BrowserManager;
 import com.automation.utils.PropertiesLoader;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.IOException;
 
@@ -15,7 +17,7 @@ public class BaseTest {
         return tdriver.get();
     }
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() throws IOException {
         // Load URL from properties
         String url = PropertiesLoader.loadProperty("url");
@@ -41,7 +43,7 @@ public class BaseTest {
         getDriver().get(url);
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         // Close the browser and clean up the ThreadLocal instance
         if (getDriver() != null) {

@@ -23,7 +23,7 @@ public class EnterAccountInformationPage extends BaseTest {
     @FindBy(id = "password")
     private WebElement passwordInput;
 
-    @FindBy(id = "days")
+    @FindBy(xpath = "//select[@id='days']")
     private WebElement daysSelect;
 
     @FindBy(id = "months")

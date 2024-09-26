@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 @Epic("Regression Tests")
 @Feature("Verify")
 public class TestCase7 extends BaseTest {
-
     @Test(description = "Test Case 7: Verify Test Cases Page")
     @Severity(SeverityLevel.TRIVIAL)
     @Story("Verify Test Cases Page")
@@ -19,10 +18,16 @@ public class TestCase7 extends BaseTest {
             4. Click on 'Test Cases' button
             5. Verify user is navigated to test cases page successfully""")
     public void verifyTestCasesPage() {
-
+        TestCase1.verifyThatHomePageIsVisibleSuccessfully();
+        verifyUserIsNavigatedToTestCasesPageSuccessfully();
     }
 
     @Step("Verify user is navigated to test cases page successfully")
     private void verifyUserIsNavigatedToTestCasesPageSuccessfully() {
+        String testCasesText = new HomePage(getDriver())
+                .testCasesButtonClick()
+                .getTestCases()
+                .getText();
+        Assert.assertEquals(testCasesText, "TEST CASES", "Verify user is navigated to test cases page successfully");
     }
 }

@@ -27,7 +27,7 @@ public class JSONReader {
 
     public static String paymentDetails(String data) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        FileReader fileReader = new FileReader("src\\test\\resources\\testData\\PaymentDetails.json");
+        FileReader fileReader = new FileReader("src\\test\\java\\com\\automation\\resources\\testData\\PaymentDetails.json");
         Object obj = jsonParser.parse(fileReader);
         JSONObject paymentDetails = (JSONObject) obj;
         return (String)paymentDetails.get(data);

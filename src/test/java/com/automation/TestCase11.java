@@ -10,7 +10,6 @@ import java.io.IOException;
 @Epic("Regression Tests")
 @Feature("Cart")
 public class TestCase11 extends BaseTest {
-
     @Test(description = "Test Case 11: Verify Subscription in Cart page")
     @Severity(SeverityLevel.TRIVIAL)
     @Story("Verify Subscription in Cart page")
@@ -23,6 +22,9 @@ public class TestCase11 extends BaseTest {
             6. Enter email address in input and click arrow button
             7. Verify success message 'You have been successfully subscribed!' is visible""")
     public void verifySubscriptionInCartPage() throws IOException, ParseException {
-
+        TestCase1.verifyThatHomePageIsVisibleSuccessfully();
+        new HomePage(getDriver()).cartButtonClick();
+        TestCase10.verifyTextSubscription();
+        TestCase10.verifySuccessMessageYouHaveBeenSuccessfullySubscribedIsVisible();
     }
 }

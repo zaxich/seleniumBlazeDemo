@@ -14,7 +14,6 @@ import java.util.List;
 @Epic("Regression Tests")
 @Feature("Place Order")
 public class TestCase14 extends BaseTest {
-
     String name = "name" + Util.generateCurrentDateAndTime();
     String email = "email" + Util.generateCurrentDateAndTime() + "@o2.pl";
 
@@ -43,20 +42,42 @@ public class TestCase14 extends BaseTest {
             19. Click 'Delete Account' button
             20. Verify 'ACCOUNT DELETED!' and click 'Continue' button""")
     public void placeOrderRegisterWhileCheckout() throws IOException, ParseException {
-
+        TestCase1.verifyThatHomePageIsVisibleSuccessfully();
+        verifyThatCartPageIsDisplayed();
+        verifyAccountCreatedAndClickContinueButton(name, email);
+        verifyLoggedInAsUsernameAtTop(name);
+        verifyAddressDetailsAndReviewYourOrder();
+        verifySuccessMessageCongratulationsYourOrderHasBeenConfirmed();
+        TestCase1.verifyThatAccountDeletedIsVisibleAndClickContinueButton();
     }
 
     @Step("Verify that cart page is displayed")
     public static void verifyThatCartPageIsDisplayed() {
+        String shoppingCartText = new ProductsPage(getDriver())
+                .addProductsToCart()
+                .getShoppingCart()
+                .getText();
+        Assert.assertEquals(shoppingCartText, "Shopping Cart", "Verify that cart page is displayed");
     }
 
     @Step("Verify 'ACCOUNT CREATED!' and click 'Continue' button")
     public static void verifyAccountCreatedAndClickContinueButton(String name, String email) throws IOException, ParseException {
-
+        String accountCreatedText = new HomePage(getDriver())
+                .signupLoginClick()
+                .fillCorrectSignup(name, email)
+                .fillAccountDetails()
+                .getAccountCreated()
+                .getText();
+        Assert.assertEquals(accountCreatedText, "ACCOUNT CREATED!", "Verify 'ACCOUNT CREATED!'");
+        new AccountCreatedPage(getDriver()).continueButtonClick();
     }
 
     @Step("Verify ' Logged in as username' at top")
     public static void verifyLoggedInAsUsernameAtTop(String name) {
+        String username = new LoggedHomePage(getDriver())
+                .getUsername()
+                .getText();
+        Assert.assertEquals(username, name, "Verify ' Logged in as username' at top");
     }
 
     @Step("Verify Address Details and Review Your Order")

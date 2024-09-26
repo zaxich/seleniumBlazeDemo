@@ -12,7 +12,6 @@ import java.util.List;
 @Epic("Regression Tests")
 @Feature("Search")
 public class TestCase9 extends BaseTest {
-
     static String search;
 
     static {
@@ -36,16 +35,29 @@ public class TestCase9 extends BaseTest {
             7. Verify 'SEARCHED PRODUCTS' is visible
             8. Verify all the products related to search are visible""")
     public void searchProduct() {
-
+        TestCase1.verifyThatHomePageIsVisibleSuccessfully();
+        TestCase8.verifyUserIsNavigatedToAllProductsPageSuccessfully();
+        verifySearchedProductsIsVisible();
+        verifyAllTheProductsRelatedToSearchAreVisible();
     }
 
     @Step("Verify 'SEARCHED PRODUCTS' is visible")
     public static void verifySearchedProductsIsVisible() {
+        String searchedProductsText = new ProductsPage(getDriver())
+                .fillSearchProductInput(search)
+                .getTitleTextCenter()
+                .getText();
+        Assert.assertEquals(searchedProductsText, "SEARCHED PRODUCTS", "Verify 'SEARCHED PRODUCTS' is visible");
     }
 
-//    @Step("Verify all the products related to search are visible")
-//    public static List<String> verifyAllTheProductsRelatedToSearchAreVisible() {
-//
-//        return productsNames;
-//    }
+    @Step("Verify all the products related to search are visible")
+    public static List<String> verifyAllTheProductsRelatedToSearchAreVisible() {
+        List<String> productsNames = new ProductsPage(getDriver()).getProductsSearchNames();
+
+        for (int i = 0; i < productsNames.size(); i++) {
+            Assert.assertTrue(productsNames.get(i).toLowerCase().contains(search.toLowerCase()));
+            System.out.println(i + ". " + productsNames.get(i) + " - contain: " + search);
+        }
+        return productsNames;
+    }
 }

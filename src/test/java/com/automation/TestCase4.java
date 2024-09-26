@@ -27,10 +27,17 @@ public class TestCase4 extends BaseTest {
             9. Click 'Logout' button
             10. Verify that user is navigated to login page""")
     public void logoutUser() throws IOException, ParseException {
-
+        TestCase2.loginUserWithCorrectEmailAndPassword();
+        verifyThatUserIsNavigatedToLoginPage();
     }
 
     @Step("Verify that user is navigated to login page")
     private void verifyThatUserIsNavigatedToLoginPage() {
+        String loginToYourAccountText = new LoggedHomePage(getDriver())
+                .logoutButtonClick()
+                .getLoginToYourAccount()
+                .getText();
+        Assert.assertEquals(loginToYourAccountText, "Login to your account",
+                "Verify user is logged out");
     }
 }
