@@ -25,7 +25,7 @@ public class SeleniumHelper {
 
     public static void waitForNotToEmptyList(WebDriver driver, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10L));
-        wait.until(driver1 -> driver.findElements(locator).size() > 0);
+        wait.until(driver1 -> !driver.findElements(locator).isEmpty());
     }
 
     public static void waitForElementToBeClickable(WebDriver driver, WebElement element) {
