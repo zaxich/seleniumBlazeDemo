@@ -76,7 +76,7 @@ public class TestCase1 extends BaseTest {
     @Step("Verify that 'ACCOUNT CREATED!' is visible")
     private void verifyThatAccountCreatedIsVisible() throws IOException, ParseException {
         String accountCreatedText = new EnterAccountInformationPage(getDriver())
-                .fillAccountDetails()
+                .fillAccountDetails("new")
                 .getAccountCreated()
                 .getText();
         Assert.assertEquals(accountCreatedText, "ACCOUNT CREATED!", "Verify that 'ACCOUNT CREATED!' is visible");

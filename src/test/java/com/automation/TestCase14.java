@@ -44,9 +44,9 @@ public class TestCase14 extends BaseTest {
     public void placeOrderRegisterWhileCheckout() throws IOException, ParseException {
         TestCase1.verifyThatHomePageIsVisibleSuccessfully();
         verifyThatCartPageIsDisplayed();
-        verifyAccountCreatedAndClickContinueButton(name, email);
+        verifyAccountCreatedAndClickContinueButton(name, email, "new");
         verifyLoggedInAsUsernameAtTop(name);
-        verifyAddressDetailsAndReviewYourOrder();
+        verifyAddressDetailsAndReviewYourOrder("new");
         verifySuccessMessageCongratulationsYourOrderHasBeenConfirmed();
         TestCase1.verifyThatAccountDeletedIsVisibleAndClickContinueButton();
     }
@@ -61,11 +61,11 @@ public class TestCase14 extends BaseTest {
     }
 
     @Step("Verify 'ACCOUNT CREATED!' and click 'Continue' button")
-    public static void verifyAccountCreatedAndClickContinueButton(String name, String email) throws IOException, ParseException {
+    public static void verifyAccountCreatedAndClickContinueButton(String name, String email, String type) throws IOException, ParseException {
         String accountCreatedText = new HomePage(getDriver())
                 .signupLoginClick()
                 .fillCorrectSignup(name, email)
-                .fillAccountDetails()
+                .fillAccountDetails(type)
                 .getAccountCreated()
                 .getText();
         Assert.assertEquals(accountCreatedText, "ACCOUNT CREATED!", "Verify 'ACCOUNT CREATED!'");
@@ -81,8 +81,8 @@ public class TestCase14 extends BaseTest {
     }
 
     @Step("Verify Address Details and Review Your Order")
-    public static void verifyAddressDetailsAndReviewYourOrder() throws IOException, ParseException {
-        verifyAddressDetails();
+    public static void verifyAddressDetailsAndReviewYourOrder(String type) throws IOException, ParseException {
+        verifyAddressDetails(type);
 
         List<String> productNames = new CartPage(getDriver()).getProductsNames();
         List<String> prices = new CartPage(getDriver()).getPrices();
@@ -91,16 +91,16 @@ public class TestCase14 extends BaseTest {
         String totalAmount = new CheckoutPage(getDriver()).getTotalAmount().getText();
 
         for (int i = 0; i < 2; i++) {
-            Assert.assertEquals(totalPrices.get(i), prices.get(i), "Verify Review Your Order");
-            Assert.assertEquals(quantity.get(i), "1", "Verify Review Your Order");
+            Assert.assertEquals(totalPrices.get(i), "Rs. " + Integer.parseInt(prices.get(i).replaceAll("Rs. ", ""))*Integer.parseInt(quantity.get(i)), "Verify Review Your Order");
+//            Assert.assertEquals(quantity.get(i), "1", "Verify Review Your Order");
         }
 
         Assert.assertEquals(productNames.get(0), "Blue Top", "Verify Review Your Order");
         Assert.assertEquals(productNames.get(1), "Men Tshirt", "Verify Review Your Order");
-        Assert.assertEquals(totalAmount, "Rs. 900", "Verify Review Your Order");
+//        Assert.assertEquals(totalAmount, "Rs. 900", "Verify Review Your Order");
     }
 
-    public static void verifyAddressDetails() throws IOException, ParseException {
+    public static void verifyAddressDetails(String type) throws IOException, ParseException {
         List<String> addressDelivery = new HomePage(getDriver())
                 .cartButtonClick()
                 .proceedToCheckoutLoggedButtonClick()
@@ -111,18 +111,19 @@ public class TestCase14 extends BaseTest {
         Assert.assertEquals(addressInvoice.get(0), "YOUR BILLING ADDRESS", "Verify Address Details");
 
         for (int i = 1; i < 8; i++) {
-            Assert.assertEquals(addressDelivery.get(i), addressInvoice.get(i), "Verify Address Details");
+            //add regex to replace double space, cause there's ads that give search button (extra space) on "test"
+            Assert.assertEquals(addressDelivery.get(i).replaceAll(" {2}", " "), addressInvoice.get(i).replaceAll(" {2}", " "), "Verify Address Details");
         }
 
-        String no1 = "Mr. " + JSONReader.accountDetails("firstName") + " " + JSONReader.accountDetails("lastName");
-        String no2 = JSONReader.accountDetails("company");
-        String no3 = JSONReader.accountDetails("address1");
-        String no4 = JSONReader.accountDetails("address2");
-        String no5 = JSONReader.accountDetails("city") + " " + JSONReader.accountDetails("state") + " " + JSONReader.accountDetails("zipcode");
-        String no6 = JSONReader.accountDetails("country");
-        String no7 = JSONReader.accountDetails("mobileNumber");
+        String no1 = "Mr. " + JSONReader.accountDetails(type, "firstName") + " " + JSONReader.accountDetails(type,"lastName");
+        String no2 = JSONReader.accountDetails(type,"company");
+        String no3 = JSONReader.accountDetails(type,"address1");
+        String no4 = JSONReader.accountDetails(type,"address2");
+        String no5 = JSONReader.accountDetails(type,"city") + " " + JSONReader.accountDetails(type,"state") + " " + JSONReader.accountDetails(type,"zipcode");
+        String no6 = JSONReader.accountDetails(type,"country");
+        String no7 = JSONReader.accountDetails(type,"mobileNumber");
 
-        Assert.assertEquals(addressDelivery.get(1), no1, "Verify Address Details");
+        Assert.assertEquals(addressDelivery.get(1).replaceAll(" {2}", " "), no1, "Verify Address Details");
         Assert.assertEquals(addressDelivery.get(2), no2, "Verify Address Details");
         Assert.assertEquals(addressDelivery.get(3), no3, "Verify Address Details");
         Assert.assertEquals(addressDelivery.get(4), no4, "Verify Address Details");

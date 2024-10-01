@@ -36,7 +36,7 @@ public class ProductsPage {
     @FindBy(css = "button[data-dismiss='modal']")
     private WebElement continueShoppingButton;
 
-    @FindBy(css = "a[href='/view_cart'] u")
+    @FindBy(css = "a[href='/view_cart']")
     private WebElement viewCartButton;
 
     @FindBy(css = "a[href='#Men']")
@@ -93,6 +93,10 @@ public class ProductsPage {
         continueShoppingButton.click();
         SeleniumHelper.waitForElementToBeClickable(driver, addToCartButton2);
         addToCartButton2.click();
+        return viewCartButtonClick();
+    }
+
+    public CartPage viewCartButtonClick(){
         SeleniumHelper.waitForElementToBeClickable(driver, viewCartButton);
         viewCartButton.click();
         return new CartPage(driver);

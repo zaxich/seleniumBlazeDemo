@@ -1,0 +1,15 @@
+{
+  "firstName": "Test FirstName",
+  "lastName": "Test LastName",
+  "day": "1",
+  "month": "1",
+  "year": "1996",
+  "company": "Test Company",
+  "address1": "Test Address",
+  "address2": "Test Address2",
+  "country": "India",
+  "state": "Test State",
+  "city": "Test City",
+  "zipcode": "Test Zipcode",
+  "mobileNumber": "123456789"
+}

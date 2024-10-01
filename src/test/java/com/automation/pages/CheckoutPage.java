@@ -15,7 +15,7 @@ public class CheckoutPage {
     @FindBy(xpath = "//ul[contains(@id, 'address_invoice')]//li")
     private List<WebElement> addressInvoice;
 
-    @FindBy(xpath = "//section/div/div[5]/table/tbody/tr[3]/td[4]/p")
+    @FindBy(xpath = "(//p[@class=\"cart_total_price\"])[last()]")
     private WebElement totalAmount;
 
     @FindBy(css = "textarea[name='message']")
